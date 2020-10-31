@@ -55,7 +55,7 @@ def git_pull(author_info):
             continue
         if(os.path.exists(os.path.join("./.gitrepo", author["authorhash"]))):
             subprocess.run(["git", "-C", os.path.join("./.gitrepo",
-                                                      author["authorhash"]), "fetch", "origin"], capture_output=True)
+                                                      author["authorhash"]), "pull", "origin"], capture_output=True)
         else:
             subprocess.run(["git", "clone", author["git-repo"], os.path.join(
                 "./.gitrepo", author["authorhash"])], capture_output=True)
@@ -325,7 +325,7 @@ def main():
         subprocess.run(["git", "-C", "./site", "push",
                         "origin", "master"], capture_output=True)
         subprocess.run(["git", "-C", "/static/sjtuoj",
-                        "fetch"], capture_output=True)  # This is a call to the server to update.
+                        "pull"], capture_output=True)  # This is a call to the server to update.
     else:
         print("Nothing have changed. Quitting...")
 
