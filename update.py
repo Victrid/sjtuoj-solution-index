@@ -310,7 +310,7 @@ def main():
         proc = subprocess.run(
             ["git", "clone", "git@github.com:SJTU-OJ/SJTU-OJ.github.io.git", "./mkdocs/site"], capture_output=True)
     subprocess.run(["rm", "./mkdocs/nr/*"], capture_output=True)
-    subprocess.run(["cp", "./.tmp/*", "./mkdocs/nr/"], capture_output=True)
+    subprocess.run(["cp", "./.tmp/*", "./mkdocs/docs/nr/"], capture_output=True)
     os.chdir("./mkdocs")
     subprocess.run(["mkdocs", "build"], capture_output=True)
     proc = subprocess.run(["git", "-C", "./site",
