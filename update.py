@@ -93,7 +93,7 @@ def question_cache(i, counter):
             time.sleep(10)
         if z % 125 == 0:
             time.sleep(120)
-        html = request.urlopen(request.Request(
+        html = urllib.request.urlopen(urllib.request.Request(
             'https://acm.sjtu.edu.cn/OnlineJudge/problem/'+question_number)).read()
         soup = BeautifulSoup(html, features="lxml")
         taglist = soup.find_all('div', attrs={'class': 'page-header'})
@@ -117,8 +117,8 @@ def available_index(counter):
     while 1 == 1:
         html_doc = 'https://acm.sjtu.edu.cn/OnlineJudge/problems?page=' + \
             str(i)
-        req = request.Request(html_doc)
-        webpage = request.urlopen(req)
+        req = urllib.request.Request(html_doc)
+        webpage = urllib.request.urlopen(req)
         z = counter.count()
         if z % 5 == 0:
             time.sleep(2)
