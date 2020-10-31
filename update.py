@@ -11,7 +11,7 @@ import re
 import chardet
 import codecs
 import urllib
-import request
+import urllib.request
 import time
 from bs4 import BeautifulSoup
 
