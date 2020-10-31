@@ -321,7 +321,7 @@ def main():
         subprocess.run(["git", "-C", "./site", "add", "."],
                        capture_output=True)
         subprocess.run(["git", "-C", "./site", "commit", "-m",
-                        "v"+str(update_script_version)+" Data Update "+time.time()], capture_output=True)
+                        "v"+str(update_script_version)+" Data Update "+str(time.time())], capture_output=True)
         subprocess.run(["git", "-C", "./site", "push",
                         "origin", "master"], capture_output=True)
         subprocess.run(["git", "-C", "/static/sjtuoj",
