@@ -1,0 +1,4 @@
+.question_cache/*
+.tmp/*
+.gitrepo/*
+mkdocs/site/*
