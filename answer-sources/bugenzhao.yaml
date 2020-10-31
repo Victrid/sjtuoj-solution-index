@@ -1,4 +1,4 @@
 author: BugenZhao
 git-repo: git@github.com:BugenZhao/DataStructure-OJ.git
 type: direct
-route: src/[NUMBER].cpp
+route: "src/[NUMBER].cpp"

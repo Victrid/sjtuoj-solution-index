@@ -2,4 +2,5 @@ author: skyzh
 link: https://www.skyzh.dev/
 git-repo: git@github.com:skyzh/sjtu-acm-oj.git
 type: direct
-route: oj/[NUMBER].cpp
+private: true
+route: "oj/[NUMBER].cpp"

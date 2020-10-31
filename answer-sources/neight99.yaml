@@ -1,4 +1,4 @@
 author: Neight99
 git-repo: git@github.com:Neight99/SJTU_DataStructure_A.git
 type: recursive
-route: [NUMBER].cpp
+route: "[NUMBER].cpp"

@@ -1,4 +1,4 @@
 author: CallMeInk
 git-repo: git@github.com:CallMeInk/SJTUOJ.git
 type: direct
-route: [NUMBER].cpp
+route: "[NUMBER].cpp"

@@ -1,4 +1,4 @@
 author: ligongzzz
 git-repo: git@github.com:ligongzzz/SJTU-OJ.git
 type: direct
-route: Code/[NUMBER].cpp
+route: "Code/[NUMBER].cpp"

@@ -1,4 +1,4 @@
 author: WashSwang
 git-repo: git@github.com:WashSwang/SJTUOJ.git
 type: direct
-route: [NUMBER]/main.cpp
+route: "[NUMBER]/main.cpp"
