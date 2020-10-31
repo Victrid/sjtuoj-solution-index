@@ -1,0 +1,4 @@
+author: LuminousXLB
+git-repo: git@github.com:LuminousXLB/sjtuoj.git
+type: direct
+route: [NUMBER]_ac/main.cpp

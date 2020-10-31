@@ -1,0 +1,4 @@
+author: Zsi-r
+git-repo: git@github.com:Zsi-r/CS221.git
+type: direct
+route: assignment/[NUMBER].cpp
