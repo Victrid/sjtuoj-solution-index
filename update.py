@@ -309,7 +309,7 @@ def main():
     else:
         proc = subprocess.run(
             ["git", "clone", "git@github.com:SJTU-OJ/SJTU-OJ.github.io.git", "./mkdocs/site"], capture_output=True)
-    subprocess.run(["rm", "./mkdocs/nr/*"], capture_output=True)
+    subprocess.run(["rm", "./mkdocs/docs/nr/*"], capture_output=True)
     subprocess.run(["cp", "./.tmp/*", "./mkdocs/docs/nr/"], capture_output=True)
     os.chdir("./mkdocs")
     subprocess.run(["mkdocs", "build"], capture_output=True)
@@ -321,7 +321,7 @@ def main():
         subprocess.run(["git", "-C", "./site", "add", "."],
                        capture_output=True)
         subprocess.run(["git", "-C", "./site", "commit", "-m",
-                        "v"+update_script_version+" Data Update "+time.time()], capture_output=True)
+                        "v"+str(update_script_version)+" Data Update "+time.time()], capture_output=True)
         subprocess.run(["git", "-C", "./site", "push",
                         "origin", "master"], capture_output=True)
         subprocess.run(["git", "-C", "/static/sjtuoj",
