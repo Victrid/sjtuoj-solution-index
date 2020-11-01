@@ -1,6 +1,7 @@
 site_name: SJTUOJ解答集
 theme:
   name: 'material'
+  custom_dir: overrides
 repo_url: https://github.com/SJTU-OJ/SJTU-OJ.github.io/
 repo_name: SJTU-OJ/SJTU-OJ.github.io
 site_description: 一个SJTUOJ的题解分享网站
