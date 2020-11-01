@@ -15,7 +15,7 @@ import urllib.request
 import time
 from bs4 import BeautifulSoup
 
-update_script_version = "2.0.0"
+update_script_version = "2.0.1"
 
 
 def get_authors():
@@ -309,12 +309,13 @@ def main():
     else:
         proc = subprocess.run(
             ["git", "clone", "git@github.com:SJTU-OJ/SJTU-OJ.github.io.git", "./mkdocs/site"], capture_output=True)
-    subprocess.run(["rm", "./mkdocs/docs/nr/*"], capture_output=True)
-    subprocess.run(["cp", "./.tmp/*", "./mkdocs/docs/nr/"], capture_output=True)
+    subprocess.run("rm ./mkdocs/docs/nr/*", shell=True, capture_output=True)
+    subprocess.run("cp ./.tmp/* ./mkdocs/docs/nr/",
+                   shell=True, capture_output=True)
     os.chdir("./mkdocs")
     subprocess.run(["mkdocs", "build"], capture_output=True)
     proc = subprocess.run(["git", "-C", "./site",
-                           "diff-files", "--", "nr"], capture_output=True)
+                           "status", "-s", "nr"], capture_output=True)
     if proc.stdout:
         print("Changed. Commiting...")
         print(proc.stdout.decode("UTF-8"))
