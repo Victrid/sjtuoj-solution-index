@@ -2,7 +2,7 @@
 
 **OJ answer sheet**
 
-version 2.0.0
+version 2.0.2
 
 ## version history
 
@@ -52,3 +52,8 @@ version 2.0.0
 - 2.0.0
     - All generating scripts rewritten.
     - generation scripts can be found [here](https://github.com/SJTU-OJ/scripts).
+- 2.0.1
+    - Bug fixed.
+- 2.0.2
+    - Add log for error tracing.
+
