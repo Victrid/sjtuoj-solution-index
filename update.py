@@ -14,8 +14,14 @@ import urllib
 import urllib.request
 import time
 from bs4 import BeautifulSoup
+import logging
+from systemd.journal import JournalHandler
 
-update_script_version = "2.0.1"
+update_script_version = "2.0.2"
+
+log = logging.getLogger('stdlog')
+log.addHandler(JournalHandler())
+log.setLevel(logging.INFO)
 
 
 def get_authors():
@@ -30,11 +36,11 @@ def get_authors():
                     author_dict["authorhash"] = md5.hexdigest()
                     author_info.append(author_dict)
                 except yaml.YAMLError:
-                    sys.stderr.write("Load error in file\n" +
-                                     os.path.join(root, name)+"\n")
+                    log.error("SJTUOJ Update Service: Load error in file" +
+                              os.path.join(root, name))
                 except:
-                    sys.stderr.write(
-                        "Unknown error happend in function get_authors().\n")
+                    log.error(
+                        "SJTUOJ Update Service: Unknown error happend in function get_authors().")
                     exit(-1)
     return author_info
 
@@ -42,16 +48,16 @@ def get_authors():
 def git_pull(author_info):
     if os.path.exists("./.gitrepo"):
         if not os.path.isdir("./.gitrepo"):
-            sys.stderr.write(".gitrepo exists and is not a dir. aborting.\n")
+            log.error("SJTUOJ Update Service: .gitrepo exists and is not a dir. aborting.")
             exit(-1)
     else:
         os.makedirs("./.gitrepo")
         gitignore = open("./.gitrepo/.gitignore", "w+")
-        gitignore.write("./*\n")
+        gitignore.write("*\n")
         gitignore.close()
     for author in author_info:
         if "authorhash" not in author:
-            sys.stderr.write("Author name and hash should not be ignored.")
+            log.error("SJTUOJ Update Service: Author name and hash should not be ignored.")
             continue
         if(os.path.exists(os.path.join("./.gitrepo", author["authorhash"]))):
             subprocess.run(["git", "-C", os.path.join("./.gitrepo",
@@ -75,8 +81,7 @@ def question_cache(i, counter):
     question_number = question_number.zfill(4)
     if os.path.exists("./.question_cache"):
         if not os.path.isdir("./.question_cache"):
-            sys.stderr.write(
-                ".question_cache exists and is not a dir. aborting.\n")
+            log.error("SJTUOJ Update Service: .question_cache exists and is not a dir. aborting.")
             exit(-1)
     else:
         os.makedirs("./.question_cache")
@@ -178,7 +183,7 @@ def indexgen(avail):
 
 def arrange(author, number, output):
     if "type" not in author:
-        sys.stderr.write("type must be indicated.")
+        log.error("SJTUOJ Update Service: type must be indicated.")
         return 0
     author_base = os.path.join("./.gitrepo", author["authorhash"])
     if author["type"] == "direct":
@@ -247,7 +252,7 @@ def arrange(author, number, output):
 def generate_all(author_info):
     if os.path.exists("./.tmp"):
         if not os.path.isdir("./.tmp"):
-            sys.stderr.write(".tmp exists and is not a dir. aborting.\n")
+            log.error("SJTUOJ Update Service: .tmp exists and is not a dir. aborting.")
             exit(-1)
     else:
         os.makedirs("./.tmp")
@@ -294,13 +299,30 @@ def generate_all(author_info):
 
 
 def main():
+    log.info("SJTUOJ Update Service: started.")
     os.chdir(os.path.abspath(os.path.dirname(sys.argv[0])))
+    subprocess.run(["git",
+                    "remote", "update"], capture_output=True)
+    proc1 = subprocess.run(["git", "rev-parse", "origin"], capture_output=True)
+    proc2 = subprocess.run(["git", "rev-parse", "@"], capture_output=True)
+    if proc1.stdout != proc2.stdout:
+        subprocess.run(["git",
+                        "pull"], capture_output=True)
+        log.info("SJTUOJ Update Service: The script has been updated.")
+        log.info("SJTUOJ Update Service: Restarting...")
+        os.execv(sys.executable, ['python', __file__] + sys.argv[1:])
+        log.info("SJTUOJ Update Service: Update service host quit.")
+        exit(0)
+    else:
+        log.info("SJTUOJ Update Service: The script is the newest.")
     author_info = get_authors()
     git_pull(author_info)
+    log.info("SJTUOJ Update Service: repository pull complete.")
     generate_all(author_info)
+    log.info("SJTUOJ Update Service: file generation complete.")
     if os.path.exists("./mkdocs/docs/nr"):
         if not os.path.isdir("./mkdocs/docs/nr"):
-            sys.stderr.write("nr exists and is not a dir. aborting.\n")
+            log.error("SJTUOJ Update Service: nr exists and is not a dir. aborting.")
             exit(-1)
     else:
         os.makedirs("./mkdocs/docs/nr")
@@ -314,11 +336,11 @@ def main():
                    shell=True, capture_output=True)
     os.chdir("./mkdocs")
     subprocess.run(["mkdocs", "build"], capture_output=True)
+    log.info("SJTUOJ Update Service: Mkdocs build complete.")
     proc = subprocess.run(["git", "-C", "./site",
                            "status", "-s", "nr"], capture_output=True)
     if proc.stdout:
-        print("Changed. Commiting...")
-        print(proc.stdout.decode("UTF-8"))
+        log.info("SJTUOJ Update Service: Content changed. Updating...")
         subprocess.run(["git", "-C", "./site", "add", "."],
                        capture_output=True)
         subprocess.run(["git", "-C", "./site", "commit", "-m",
@@ -327,8 +349,10 @@ def main():
                         "origin", "master"], capture_output=True)
         subprocess.run(["git", "-C", "/static/sjtuoj",
                         "pull"], capture_output=True)  # This is a call to the server to update.
+        log.info("SJTUOJ Update Service: service renewed.")
     else:
-        print("Nothing have changed. Quitting...")
+        log.info("SJTUOJ Update Service: Contents up-to-date.")
+    log.info("SJTUOJ Update Service: Quit.")
 
 
 if __name__ == '__main__':
