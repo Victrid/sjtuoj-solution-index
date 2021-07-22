@@ -1,5 +1,5 @@
 author: yyong119
-git-repo: git@github.com:yyong119/SJTU-OJ.git
+git-repo: git@github.com:yyong119/ACM-OnlineJudge.git
 type: direct
 private: false
 route: "[NUMBER].cpp"
