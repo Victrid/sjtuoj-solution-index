@@ -3,7 +3,7 @@ import os
 import subprocess
 import sys
 
-from operations.authors import get_authors
+from operations.authors import get_authors, git_pull
 from operations.file_processing import generate_all
 from operations.helpers import log
 
@@ -28,7 +28,7 @@ def call_mkdocs():
     location = os.getenv('PRODUCT_LOC', None)
     if location is not None:
         subprocess.run("rm -rf {}/*".format(location), shell=True, capture_output=True)
-        subprocess.run("mv ./mkdocs/site {}".format(location), shell=True, capture_output=True)
+        subprocess.run("mv ./site/* {}".format(location), shell=True, capture_output=True)
     log.info("SJTUOJ Update Service: Quit.")
 
 
@@ -38,7 +38,7 @@ def main():
 
     author_info = get_authors()
 
-    # git_pull(author_info)
+    git_pull(author_info)
 
     log.info("SJTUOJ Update Service: repository pull complete.")
 
