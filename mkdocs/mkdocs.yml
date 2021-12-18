@@ -1,7 +1,10 @@
 site_name: SJTUOJ解答集
+site_url: https://oj.sjtucs.com
 theme:
   name: 'material'
   custom_dir: overrides
+  palette:
+    primary: cyan
 repo_url: https://github.com/SJTU-OJ/SJTU-OJ.github.io/
 repo_name: SJTU-OJ/SJTU-OJ.github.io
 site_description: 一个SJTUOJ的题解分享网站
@@ -13,8 +16,8 @@ markdown_extensions:
 plugins:
     - search
     - minify:
-        minify_html: true
-        minify_js: true
+        minify_html: false
+        minify_js: false
         htmlmin_opts:
             remove_comments: true
 nav:

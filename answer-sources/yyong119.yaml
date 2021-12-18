@@ -3,3 +3,4 @@ git-repo: git@github.com:yyong119/ACM-OnlineJudge.git
 type: direct
 private: false
 route: "[NUMBER].cpp"
+old: true

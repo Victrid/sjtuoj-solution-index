@@ -1,4 +1,6 @@
 .question_cache/*
 .tmp/*
 .gitrepo/*
+.idea/*
 mkdocs/site/*
+mkdocs/docs/nr/*

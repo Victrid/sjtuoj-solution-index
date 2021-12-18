@@ -16,6 +16,9 @@ Please open an issue under this repository.
 
 ## configuration file format
 
+**Notice**: The OJ has renewed it's question numbering. The old OJ's question is now merged into the new one, where its numbers
+has increased by 10000. 
+
 The configuration file is located under `./answer-sources`, with extension `.yaml`.
 
 ```yaml
@@ -41,6 +44,12 @@ private: true
 (optional, default set to false)
 **false** your repository is set to public.
 **true** your repository is set to private. You need to at least grant `victrid` your repository's access to have them displayed on the website.
+```yaml
+old: false
+```
+(optional, default set to false)
+**false** your OJ looks like [this](https://acm.sjtu.edu.cn/OnlineJudge/), which is put in use around 2021. 
+**true** your OJ looks like [this](https://acm.sjtu.edu.cn/OnlineJudge-old/), which is put in use before around 2021. The OJ has renewed it's question numbering. The old OJ's question is now merged into the new one, where its numbers has increased by 10000. 
 ```yaml
 route: "path/to/[NUMBER].cpp"
 ```

@@ -2,7 +2,7 @@
 
 **OJ answer sheet**
 
-version 2.0.2
+version 3.0.0
 
 ## version history
 
@@ -56,4 +56,9 @@ version 2.0.2
     - Bug fixed.
 - 2.0.2
     - Add log for error tracing.
+- 3.0.0
+    - Add [yyong119](https://github.com/yyong119/ACM-OnlineJudge)’s solution
+    - As ACM-OJ updated, we changed the order of solutions.
+    - Most of functions are reconstructed.
+
 

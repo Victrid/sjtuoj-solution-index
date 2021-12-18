@@ -2,3 +2,4 @@ author: zqy2018
 git-repo: git@github.com:zqy1018/sjtu_oj_solutions.git
 type: direct
 route: "codes/[NUMBER].cpp"
+old: true

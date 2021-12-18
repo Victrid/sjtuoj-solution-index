@@ -2,3 +2,4 @@ author: FineArtz
 git-repo: git@github.com:FineArtz/SJTUOJ.git
 type: direct
 route: "P[NUMBER].cpp"
+old: true

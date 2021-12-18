@@ -4,3 +4,4 @@ git-repo: git@github.com:skyzh/sjtu-acm-oj.git
 type: direct
 private: true
 route: "oj/[NUMBER].cpp"
+old: true

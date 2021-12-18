@@ -2,3 +2,4 @@ author: Pangbo13
 git-repo: git@github.com:pangbo13/SJTU-OJ.git
 type: direct
 route: "[NUMBER].cpp"
+old: true
