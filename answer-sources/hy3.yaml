@@ -1,0 +1,6 @@
+author: hy3
+git-repo: git@github.com:hhy3/SJTUOJ-Solutions.git
+type: direct
+private: false
+old: false
+route: "src/[NUMBER].cpp"
